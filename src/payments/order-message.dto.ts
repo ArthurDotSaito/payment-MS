@@ -1,5 +1,6 @@
 export class OrderMessageDTO {
-  amount: number;
+  id: number;
+  client_id: number;
   price: number;
   status: string;
 }
