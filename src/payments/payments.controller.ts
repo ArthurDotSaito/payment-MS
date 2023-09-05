@@ -1,6 +1,7 @@
 import { Controller, Get } from '@nestjs/common';
 import { PaymentsService } from './payments.service';
 import { MessagePattern, Payload } from '@nestjs/microservices';
+import { OrderMessageDTO } from './order-message.dto';
 
 @Controller('payments')
 export class PaymentsController {
@@ -12,7 +13,11 @@ export class PaymentsController {
   }
 
   @MessagePattern('roders')
-  async payment(@Payload() message) {
-    await this.paymentsService.payment();
+  async payment(@Payload() message: OrderMessageDTO) {
+    await this.paymentsService.payment({
+      amount: message.price,
+      order_id: message.id,
+      client_id: message.client_id,
+    });
   }
 }
