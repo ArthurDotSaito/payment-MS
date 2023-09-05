@@ -12,7 +12,7 @@ export class PaymentsController {
     return this.paymentsService.all();
   }
 
-  @MessagePattern('roders')
+  @MessagePattern('orders')
   async payment(@Payload() message: OrderMessageDTO) {
     await this.paymentsService.payment({
       amount: message.price,
